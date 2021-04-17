@@ -86,11 +86,35 @@
   position:fixed;
   top: 0;
   right: 0;
-  background-color: red;
+  background-color: #a6a6a6;
   overflow-x: hidden;
   overflow-y: hidden;
   padding-top: 5;
   padding: 0.1% 0;
+}
+
+.paneHeaderRight img.logoutButton{
+  margin-top: 0%;
+  margin-bottom: auto;
+  position: absolute;
+  right: 3%;
+  width: 7%;
+}
+
+.paneHeaderRight img.notificationsButton{
+  margin-top: 0%;
+  margin-bottom: auto;
+  position: absolute;
+  right: 28%;
+  width: 7%;
+}
+
+.paneHeaderRight img.helpButton{
+  margin-top: 0%;
+  margin-bottom: auto;
+  position: absolute;
+  right: 19%;
+  width: 7%;
 }
 
 #sidenavLeft a, #sidenavRight a {
@@ -99,13 +123,16 @@
   font-size: 40px;
   color: darkblue;
   display: block;
-  position: relative
+  position: relative;
+}
+
+.buttonWrap:hover img {
+  opacity: 0.4;
 }
 
 #sidenavLeft a:hover ,#sidenavRight a:hover {
   color: white
 }
-
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
