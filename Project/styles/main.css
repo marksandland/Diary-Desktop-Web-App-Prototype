@@ -1,0 +1,113 @@
+  
+#sidenavLeft::-webkit-scrollbar,#sidenavRight::-webkit-scrollbar {
+  width: 5px;
+}
+
+#sidenavLeft::-webkit-scrollbar-track, #sidenavRight::-webkit-scrollbar-track {
+  background: lightblue;
+}
+
+#sidenavLeft::-webkit-scrollbar-thumb, #sidenavRight::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 5px;
+  border: 1px solid darkblue;
+}
+  
+#sidenavLeft {
+  height: 100%;
+  width: 15%;
+  position:fixed;
+  top: 5%;
+  left: 0;
+  background-color: #a6a6a6;
+  overflow-x: hidden;
+  padding-top: 5;
+  word-wrap: break-word;
+  scrollbar-color: darkblue lightblue;
+  scrollbar-width: 5px;
+} 
+
+#main {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  background-color: #d9d9d9;
+  left: 15%;
+  top: 0;
+  word-wrap: break-word
+}
+
+#sidenavRight {
+  height: 100%;
+  width: 35%;
+  position:fixed;
+  top: 5%;
+  right: 0;
+  background-color: #a6a6a6;
+  overflow-x: hidden;
+  padding-top: 5;
+  word-wrap: break-word;
+  scrollbar-color: darkblue lightblue;
+  scrollbar-width: 5px;
+} 
+
+.paneHeaderLeft {
+  height: 5%;
+  width: 15%;
+  position:fixed;
+  top: 0;
+  left: 0;
+  background-color: #a6a6a6;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-top: 5;
+  padding: 0.1% 0;
+}
+
+.paneHeaderLeft img.plusButton{
+  margin-top: 2%;
+  margin-bottom: auto;
+  position: absolute;
+  left: 70%;
+  width: 12%;
+}
+
+.paneHeaderLeft img.minusButton{
+  margin-top: 2%;
+  margin-bottom: auto;
+  position: absolute;
+  left: 85%;
+  width: 12%;
+}
+
+.paneHeaderRight {
+  height: 5%;
+  width: 35%;
+  position:fixed;
+  top: 0;
+  right: 0;
+  background-color: red;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-top: 5;
+  padding: 0.1% 0;
+}
+
+#sidenavLeft a, #sidenavRight a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 40px;
+  color: darkblue;
+  display: block;
+  position: relative
+}
+
+#sidenavLeft a:hover ,#sidenavRight a:hover {
+  color: white
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
