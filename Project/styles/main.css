@@ -231,3 +231,9 @@ svg {
   color: Black;
   font-size: 1.5vw;
 }
+
+#lists {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

@@ -3,33 +3,33 @@
         <title>Task Manager</title>
         <meta http-equiv="Content-Type" content="text/html"; charset="=UTF-8">
         <link href="styles/main.css" rel="stylesheet">
+        <script src="scripts/main.js"></script>
         
         
     </head>
     <body>
         <div id="sidenavLeft">
             <div id="leftPaneHeader" class="paneHeaderLeft">
-
-                <div class= "buttonWrap">
+                <div id="buttonPlus" class= "buttonWrap">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                     </svg>
-                    
                 </div>
 
-                <div class= "buttonWrap" style= "right: 20%">
+
+                <div id="buttonMinus" class= "buttonWrap" style= "right: 20%">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
                         <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
                     </svg>
-                </div>
-
-                
+                </div>                  
             </div>
             
-            <a href="#">List1</a>
-            <a href="#">Movies</a>
-            <a href="#">Shopping</a> 
-            <a href="#">Games</a>
+            <ul id="lists">
+                <li><a href="#">List1</a></li>
+                <li><a href="#">Movies</a></li>
+                <li><a href="#">Shopping</a> </li>
+                <li><a href="#">Games</a></li>
+            </ul>
         </div>
 
         <div id="main">
