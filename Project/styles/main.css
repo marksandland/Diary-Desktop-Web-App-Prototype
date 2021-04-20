@@ -64,22 +64,6 @@
   padding: 0.1% 0;
 }
 
-.paneHeaderLeft img.plusButton{
-  margin-top: 2%;
-  margin-bottom: auto;
-  position: absolute;
-  left: 70%;
-  width: 12%;
-}
-
-.paneHeaderLeft img.minusButton{
-  margin-top: 2%;
-  margin-bottom: auto;
-  position: absolute;
-  left: 85%;
-  width: 12%;
-}
-
 .paneHeaderRight {
   height: 5%;
   width: 35%;
@@ -93,30 +77,6 @@
   padding: 0.1% 0;
 }
 
-.paneHeaderRight img.logoutButton{
-  margin-top: 0%;
-  margin-bottom: auto;
-  position: absolute;
-  right: 3%;
-  width: 7%;
-}
-
-.paneHeaderRight img.notificationsButton{
-  margin-top: 0%;
-  margin-bottom: auto;
-  position: absolute;
-  right: 28%;
-  width: 7%;
-}
-
-.paneHeaderRight img.helpButton{
-  margin-top: 0%;
-  margin-bottom: auto;
-  position: absolute;
-  right: 19%;
-  width: 7%;
-}
-
 #sidenavLeft a, #sidenavRight a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
@@ -124,10 +84,50 @@
   color: darkblue;
   display: block;
   position: relative;
+  font-family: sans-serif;
 }
 
-.buttonWrap:hover img {
-  opacity: 0.4;
+.buttonWrap {
+  background-color:	#4388CC;
+  border-color: #1B3280;
+  border-width: 10%;
+  border-style: solid;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.paneHeaderLeft .buttonWrap {
+  width: 1.8vw;
+  height: 1.8vw;
+  right: 3%;
+}
+
+.paneHeaderRight .buttonWrap {
+  width: 2.1vw;
+  height: 2.1vw;
+  right: 1%;
+}
+
+.buttonWrap:hover {
+  background-color: #2c66a0;
+}
+
+svg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.svgSizingChanges {
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  top:50%;
+  transform: translateY(-50%);
+  right:12%
 }
 
 #sidenavLeft a:hover ,#sidenavRight a:hover {
@@ -137,4 +137,97 @@
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+/* Login Screen etc.*/
+
+.loginBody {
+  background-color: #d9d9d9;
+}
+
+#loginForm {
+  height: 25%;
+  width: 31%;
+  position: absolute;
+  top: 50%;
+  padding: 10px;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  text-align: center;
+}
+
+#createAccountForm {
+  height: 25%;
+  width: 31%;
+  position: absolute;
+  top: 45%;
+  padding: 10px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  text-align: center;
+}
+
+#loginForm h1, #createAccountForm h1 {
+  font-family: 'Brush Script MT', cursive;
+}
+
+#loginForm input, #createAccountForm input {
+  height: 3vw;
+  width: 30vw;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 1.5vw;
+  border-color: black;
+}
+
+#loginForm a, #createAccountForm a {
+  color: blue;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 20px;
+}
+
+#loginForm a:hover, #createAccountForm a:hover {
+  color: rgb(0, 183, 255);
+}
+
+#loginForm input.submit, #createAccountForm input.submit {
+  width: 8vw;
+  height: 3vw;
+  background-color:#2c66a0;
+  border-color: black;
+  color: white;
+  font-size: 1.5vw;
+}
+
+#createAccountForm input.submit {
+  width: 13vw;
+}
+
+#loginForm input.submit:hover, #createAccountForm input.submit:hover {
+  background-color:#214d78;
+}
+
+#createAccountForm p {
+  color: red;
+  margin: 0.5vw;
+  text-align: left;
+}
+
+#logoContainer {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10vw;
+  height: 5vw;
+  background-color: white;
+  border-style: solid;
+  border-width: 0.2vw;
+  border-color: black;
+  display: inline-block;
+  text-align: center;
+}
+
+#logoContainer p {
+  color: Black;
+  font-size: 1.5vw;
 }

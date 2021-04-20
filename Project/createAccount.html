@@ -1,0 +1,26 @@
+<hmtl>
+    <head>
+        <title>Task Manager</title>
+        <meta http-equiv="Content-Type" content="text/html"; charset="=UTF-8">
+        <link href="styles/main.css" rel="stylesheet">
+        <script src="scripts/main.js"></script>
+        
+        
+    </head>
+    <body class="loginBody">
+        
+        <form id="createAccountForm" action="index.html" onsubmit="return createAccount()">
+            <h1>Create Account</h1>
+            <input type="text" id="email" name="email" placeholder="Email address">
+            <p id="emailError">Invalid Email Address</p>
+            <input type="text" id="username" name="username" placeholder="Username">
+            <p id="usernameError">Username already taken</p>
+            <input type="password" placeholder="Password">
+            <p id="passwordError">Must be 8-20 characters and contain at least 1 number</p>
+            <input type="password" placeholder="Re-enter password">
+            <p id="ReEnterPasswordError">Passwords do not match</p>
+            <input class="submit"type="submit" value="Create Account"><br/><br/>
+            <a href="index.html"><u>back to login</u></a>
+          </form>
+    </body>
+</hmtl>
