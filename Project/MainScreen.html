@@ -25,15 +25,41 @@
             </div>
             
             <ul id="lists">
-                <li><a href="#">List1</a></li>
-                <li><a href="#">Movies</a></li>
-                <li><a href="#">Shopping</a> </li>
-                <li><a href="#">Games</a></li>
+                <li class="list">
+                    <a id="listName">List1</a>
+                    <p hidden>0</p>
+                    <ul hidden> 
+                        <li><p>item1</p></li>
+                    </ul>
+                </li>
+                <li class="list">
+                    <p hidden>1</p>
+                    <a id="listName">Movies</a>
+                    <ul hidden><li><p>item2</p></li></ul>
+                    
+                </li>
+                
+                
+                <li class="list">
+                    <p hidden>2</p>
+                    <a id="listName">Games</a>
+                    <ul hidden></ul>
+                </li>
+                
+                <li class="list">
+                    <p hidden>3</p>
+                    <a id="listName">Shopping</a>
+                    <ul hidden></ul>
+                </li>
             </ul>
         </div>
 
         <div id="main">
+            <h1 id="listHeading"><u contenteditable="true"></u><p hidden></p></h1>
+            <ul id = "listContents">
 
+            </ul>
+            
             
 
         </div>

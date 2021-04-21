@@ -131,7 +131,15 @@ svg {
 }
 
 #sidenavLeft a:hover ,#sidenavRight a:hover {
-  color: white
+  color: white;
+  cursor: pointer;
+}
+
+h1 {
+  font-family: sans-serif;
+  color: darkblue;
+  text-align: center;
+  
 }
 
 @media screen and (max-height: 450px) {
@@ -235,5 +243,5 @@ svg {
 #lists {
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 0  ;
 }
