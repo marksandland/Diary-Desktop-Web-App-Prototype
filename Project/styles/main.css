@@ -87,7 +87,7 @@
   font-family: sans-serif;
 }
 
-.buttonWrap {
+.buttonWrapLeft {
   background-color:	#4388CC;
   border-color: #1B3280;
   border-width: 10%;
@@ -99,19 +99,30 @@
   transform: translateY(-50%);
 }
 
-.paneHeaderLeft .buttonWrap {
+.buttonWrapMain {
+  width: 3vw;
+  height: 3vw;
+  background-color:	#4388CC;
+  border-color: #1B3280;
+  border-width: 10%;
+  border-style: solid;
+  margin: 0;
+  position: absolute;
+}
+
+.paneHeaderLeft .buttonWrapLeft {
   width: 1.8vw;
   height: 1.8vw;
   right: 3%;
 }
 
-.paneHeaderRight .buttonWrap {
+.paneHeaderRight .buttonWrapLeft {
   width: 2.1vw;
   height: 2.1vw;
   right: 1%;
 }
 
-.buttonWrap:hover {
+.buttonWrapLeft:hover, .buttonWrapMain:hover {
   background-color: #2c66a0;
 }
 

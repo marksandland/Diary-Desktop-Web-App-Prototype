@@ -22,7 +22,6 @@ function addList() {
     var li = document.createElement("li");
     li.className = "list"
     var a = document.createElement("a");
-    a.href="#";
 
     a.appendChild(document.createTextNode("Untitled"));
     li.appendChild(a);
@@ -80,11 +79,11 @@ function clickedList(listName, list, index) {
 function EventHandler() {
     //Button Click Event Handler
         //Add List Button
-        var a = document.getElementById("buttonPlus");
+        var a = document.getElementById("listsButtonPlus");
         a.onclick = function() {addList()};
 
         //Remove List Button
-        var b = document.getElementById("buttonMinus");
+        var b = document.getElementById("listsButtonMinus");
         b.onclick = function() {removeList()};
 
         var lists = document.getElementsByClassName("list");
@@ -92,6 +91,8 @@ function EventHandler() {
         for (var i = 0; i < lists.length; i++ ){
             lists[i].onclick = function() {
                 clickedList(this.getElementsByTagName("a")[0].textContent, this.getElementsByTagName("ul")[0], this.getElementsByTagName("p")[0].textContent);  
+                document.getElementById("mainButtonPlus").hidden = false;
+                document.getElementById("mainButtonMinus").hidden = false;
             };
         }
         var heading = document.getElementById("listHeading");
@@ -117,5 +118,12 @@ function EventHandler() {
 }
 
 window.onload = function() { 
+
+    console.log("testing");
+        if (document.getElementById("listHeading").textContent == "") {
+        document.getElementById("mainButtonPlus").hidden = true;
+        document.getElementById("mainButtonMinus").hidden = true;
+    }
+
     EventHandler();
 }
