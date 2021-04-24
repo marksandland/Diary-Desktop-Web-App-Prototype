@@ -183,9 +183,13 @@ function clickedList(listName, list, index) {
         var text = listContents[i].getElementsByTagName("p")[0].textContent;
         var p = document.createElement("p");
         p.textContent = text;
+        var div = document.createElement("div");
+        div.className = "listContentsContainer"
+        div.appendChild(p);
+
         var li = document.createElement("li");
         
-        li.appendChild(p);
+        li.appendChild(div);
         listContentsDestination.appendChild(li);
     }
 }
@@ -195,8 +199,11 @@ function addItem() {
     //Add to main
     var p = document.createElement("p");
     p.textContent = "Untitled";
+    var div = document.createElement("div");
+    div.className = "listContentsContainer";
+    div.appendChild(p);
     var li = document.createElement("li");
-    li.appendChild(p);
+    li.appendChild(div);
 
     var ul = document.getElementById("listContents");
     ul.appendChild(li);

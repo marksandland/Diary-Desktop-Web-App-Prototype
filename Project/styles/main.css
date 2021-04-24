@@ -124,6 +124,35 @@
   cursor: pointer;
 }
 
+.listContentsContainer {
+  width: 100%;
+  height: 10%;
+  background-color: #4388CC;
+  margin: 3% 0 3% 0;
+  border-color: darkblue;
+  border-width: 2px;
+  border-style: solid;
+  position: relative;
+}
+
+#listContents {
+  padding: 0% 5% 0% 5%;
+}
+
+.listContentsContainer p {
+  color: darkblue;
+  font-size: 30px;
+  margin: 0 0 0 3%;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+ul {
+  list-style-type: none;
+}
+
 .buttonWrapMain {
   width: 2vw;
   height: 2vw;
