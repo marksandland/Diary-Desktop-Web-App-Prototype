@@ -119,13 +119,13 @@
   right: 3%;
 }
 
-#buttonWrapExitDeleteMode:hover {
+#buttonWrapExitDeleteMode:hover, #buttonWrapExitDeleteItemMode:hover {
   background-color: green;
   cursor: pointer;
 }
 
 .listContentsContainer {
-  width: 100%;
+  width: 80%;
   height: 10%;
   background-color: #4388CC;
   margin: 3% 0 3% 0;
@@ -164,6 +164,18 @@ ul {
   position: absolute;
 }
 
+#buttonWrapExitDeleteItemMode {
+  width: 2vw;
+  height: 2vw;
+  background-color:	#00b359;
+  border-color: black;
+  color: black;
+  border-width: 10%;
+  border-style: solid;
+  margin: 0;
+  position: absolute;
+}
+
 .buttonWrapDeleteList {
   width: 30px;
   height:30px;
@@ -176,6 +188,20 @@ ul {
   float: right;
   transform: translateY(-120%);
   right: 3%;
+}
+
+.buttonWrapDeleteItem {
+  width: 2vw;
+  height: 2vw;
+  background-color:	red;
+  border-color: black;
+  color: black;
+  border-width: 10%;
+  border-style: solid;
+  margin: 0;
+  right: 15%;
+  transform: translateY(-210%);
+  position: absolute;
 }
 
 .paneHeaderLeft .buttonWrapLeft {

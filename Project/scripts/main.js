@@ -101,6 +101,7 @@ function enterRemoveListMode() {
     var minusButton = document.getElementById("listsButtonMinus");
     plusButton.hidden = true;
     minusButton.hidden = true;
+    document.getElementById("buttonWrapExitDeleteItemMode").hidden = true;
 
     //Reveal delete list buttons and exit-delete-mode button
     var deleteListButtons = document.getElementsByClassName("buttonWrapDeleteList");
@@ -135,7 +136,7 @@ function exitRemoveListMode() {
     var minusButton = document.getElementById("listsButtonMinus");
     plusButton.hidden = false;
     minusButton.hidden = false;
-
+    
     //Hide delete list buttons and exit-delete-mode button
     var deleteListButtons = document.getElementsByClassName("buttonWrapDeleteList");
     for (var i = 0; i < deleteListButtons.length; i++) {
@@ -187,11 +188,19 @@ function clickedList(listName, list, index) {
         div.className = "listContentsContainer"
         div.appendChild(p);
 
+        var deleteButton = document.createElement("div");
+        deleteButton.className = "buttonWrapDeleteItem";
+        deleteButton.hidden = true;
+
         var li = document.createElement("li");
+        li.className = "contentsItem";
         
         li.appendChild(div);
+        li.appendChild(deleteButton);
         listContentsDestination.appendChild(li);
     }
+    //Hide buttons
+    document.getElementById("buttonWrapExitDeleteItemMode").hidden = true;
 }
 
 //Add Item to List
@@ -202,8 +211,14 @@ function addItem() {
     var div = document.createElement("div");
     div.className = "listContentsContainer";
     div.appendChild(p);
+    var deleteButton = document.createElement("div");
+    deleteButton.className = "buttonWrapDeleteItem";
+    deleteButton.hidden = true;
     var li = document.createElement("li");
     li.appendChild(div);
+    li.appendChild(deleteButton);
+    li.className = "contentsItem";
+    
 
     var ul = document.getElementById("listContents");
     ul.appendChild(li);
@@ -212,7 +227,6 @@ function addItem() {
     var listIndexDestination = document.getElementById("listHeading").getElementsByTagName("p")[0];
     var lists = document.getElementsByClassName("list");
     for (var i = 0; i < lists.length; i++){
-
         var x = listIndexDestination.textContent;
         var y = lists[i].getElementsByClassName("identifier")[0].textContent
         if (x==y){
@@ -223,6 +237,42 @@ function addItem() {
             lists[i].getElementsByTagName("ul")[0].appendChild(li2);
         }
     }
+}
+
+function enterRemoveItemMode() {
+    //Reveal delete buttons
+    var listContents = document.getElementById("listContents");
+    var items = listContents.getElementsByClassName("contentsItem");
+    for (var i = 0; i < items.length; i++) {
+        var deleteButton = items[i].getElementsByClassName("buttonWrapDeleteItem")[0];
+        deleteButton.hidden = false;
+    }
+
+    //Reveal exit-item-delete-mode button
+    document.getElementById("buttonWrapExitDeleteItemMode").hidden = false;
+
+    //Hide other buttons
+    document.getElementById("mainButtonPlus").hidden = true;
+    document.getElementById("mainButtonMinus").hidden = true;
+
+
+}
+
+function exitRemoveItemMode() {
+    //Reveal delete buttons
+    var listContents = document.getElementById("listContents");
+    var items = listContents.getElementsByClassName("contentsItem");
+    for (var i = 0; i < items.length; i++) {
+        var deleteButton = items[i].getElementsByClassName("buttonWrapDeleteItem")[0];
+        deleteButton.hidden = true;
+    }
+
+    //Reveal exit-item-delete-mode button
+    document.getElementById("buttonWrapExitDeleteItemMode").hidden = true;
+
+    //Hide other buttons
+    document.getElementById("mainButtonPlus").hidden = false;
+    document.getElementById("mainButtonMinus").hidden = false;
 }
 
 //Event Handler
@@ -287,6 +337,17 @@ function EventHandler() {
             });
             $( "#lists" ).disableSelection();
         } );
+
+        //Enter remove-item-mode button
+        var enterRemoveItemModeButton = document.getElementById("mainButtonMinus");
+        enterRemoveItemModeButton.onclick = function() {
+            enterRemoveItemMode();
+        }
+
+        //Exit remove-item-mode button
+        document.getElementById("buttonWrapExitDeleteItemMode").onclick = function() {
+            exitRemoveItemMode();
+        }
 }
 
 //On load
@@ -296,6 +357,7 @@ window.onload = function() {
         document.getElementById("mainButtonPlus").hidden = true;
         document.getElementById("mainButtonMinus").hidden = true;
         document.getElementById("buttonWrapExitDeleteMode").hidden = true;
+        document.getElementById("buttonWrapExitDeleteItemMode").hidden = true;
         var deleteListButtons = document.getElementsByClassName("buttonWrapDeleteList");
         for (var i = 0; i < deleteListButtons.length; i++) {
             deleteListButtons[i].hidden = true;
