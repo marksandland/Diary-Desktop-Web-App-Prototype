@@ -125,9 +125,9 @@ function enterRemoveListMode() {
 
     //override on-click for lists to remove functionality
     var lists = document.getElementsByClassName("list");
-        for (var i = 0; i < lists.length; i++ ){
-            lists[i].onclick = function() {};
-        }
+    for (var i = 0; i < lists.length; i++ ){
+        lists[i].onclick = function() {};
+    }
 }
 
 function exitRemoveListMode() {
@@ -173,13 +173,29 @@ function clickedList(listName, list, index) {
     //Prepare to load list contents
     var listContentsDestination = document.getElementById("listContents");
     var oldContents = listContentsDestination.getElementsByTagName("li");
-    //remove current displayed data
+    //Remove current displayed data
     for (var j = 0; j < oldContents.length; j+1) {
         listContentsDestination.removeChild(oldContents[j]);
     }
 
-    //load each item of the list
+    //Sort list by position
     var listContents = list.getElementsByTagName("li");
+    var x = Array.from(listContents);
+    let sorted = x.sort(sorter);
+
+    function sorter(a,b) {
+        if(a.getElementsByTagName("p1")[0].textContent < b.getElementsByTagName("p1")[0].textContent) return -1;
+        if(a.getElementsByTagName("p1")[0].textContent > b.getElementsByTagName("p1")[0].textContent) return 1;
+        return 0;
+}
+    listContents = sorted;
+
+
+
+
+
+
+    //Load each item of the list
     for (var i = 0; i < listContents.length; i++) {
         var text = listContents[i].getElementsByTagName("p")[0].textContent;
         var p = document.createElement("p");
@@ -192,19 +208,141 @@ function clickedList(listName, list, index) {
         deleteButton.className = "buttonWrapDeleteItem";
         deleteButton.hidden = true;
 
+        var svg = document.createElement("svg");
+        deleteButton.appendChild(svg);
+        svg.outerHTML = '<svg class="svgSizingChanges2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>';
+
+        var itemIdentifier = document.createElement("h1");
+        itemIdentifier.textContent = listContents[i].getElementsByTagName("h1")[0].textContent;
+        itemIdentifier.hidden = true;
+
+        var listIdentifier = document.createElement("h6");
+        listIdentifier.textContent = document.getElementById("listHeading").getElementsByTagName("p")[0].innerHTML;
+        listIdentifier.hidden = true;
+
         var li = document.createElement("li");
         li.className = "contentsItem";
         
         li.appendChild(div);
         li.appendChild(deleteButton);
+        li.appendChild(itemIdentifier);
+        li.appendChild(listIdentifier);
+        li.onclick = function() {
+            clickedItem(this);
+        }
         listContentsDestination.appendChild(li);
     }
     //Hide buttons
     document.getElementById("buttonWrapExitDeleteItemMode").hidden = true;
 }
 
+//Clicked item
+function clickedItem(item) {
+    //Get item name
+    var name = item.getElementsByClassName("listContentsContainer")[0].getElementsByTagName("p")[0].textContent;
+
+    //Get list data
+    var description;
+    var deadlineDate;
+    var deadlineTime;
+    var reminderDate;
+    var reminderTime;
+
+    var lists = document.getElementsByClassName("list");
+    for (var i = 0; i < lists.length; i++) {
+        if (lists[i].getElementsByClassName("identifier")[0].textContent == item.getElementsByTagName("h6")[0].textContent) {
+            var items = lists[i].getElementsByTagName("ul")[0].getElementsByTagName("li");
+            for (var j = 0; j < items.length; j++) {
+                if (items[j].getElementsByTagName("h1")[0].textContent == item.getElementsByTagName("h1")[0].textContent) {
+                    description = items[j].getElementsByTagName("h2")[0].textContent;
+                    deadlineDate = items[j].getElementsByTagName("h3")[0].textContent;
+                    deadlineTime = items[j].getElementsByTagName("h4")[0].textContent;
+                    reminderDate = items[j].getElementsByTagName("h5")[0].textContent;
+                    reminderTime = items[j].getElementsByTagName("h6")[0].textContent;
+                    break;
+                }
+            }
+        break;
+        }
+    }
+
+    //Load data into item viewer
+    document.getElementById("viewerListIdentifier").textContent = item.getElementsByTagName("h6")[0].textContent;
+    document.getElementById("viewerItemIdentifier").textContent = item.getElementsByTagName("h1")[0].textContent;
+    document.getElementById("name").value = name;
+    document.getElementById("taskDescription").value = description;
+    document.getElementById("deadlineDate").value = deadlineDate;
+    document.getElementById("deadlineTime").value = deadlineTime;
+    document.getElementById("reminderDate").value = reminderDate;
+    document.getElementById("reminderTime").value = reminderTime;
+
+}
+
 //Add Item to List
 function addItem() {
+    //Add to lists data
+    var listIndexDestination = document.getElementById("listHeading").getElementsByTagName("p")[0];
+    var lists = document.getElementsByClassName("list");
+    var h1_2 = document.createElement("h1");
+    h1_2.hidden = true;
+    for (var i = 0; i < lists.length; i++){
+        var x = listIndexDestination.textContent;
+        var y = lists[i].getElementsByClassName("identifier")[0].textContent
+        if (x==y){
+            var p2 = document.createElement("p");
+            p2.textContent = "Untitled";
+
+            
+
+            //Generate unique identifier code
+            var validIdentifier = false;
+            var identifier = "";
+            while (validIdentifier == false){
+                validIdentifier = true;
+                identifier = "";
+                for (var j = 0; j < 15; j++) {
+                    identifier += Math.floor(Math.random() * 10).toString();
+                }
+                
+                //Check if code is unique, if not, generate a new one
+                var currentIdentifiers = [];
+                var items = lists[i].getElementsByTagName("ul")[0].children;
+                
+                for (var j = 0; j < items.length; j++) {
+                    var identifierToCheck = items[j].getElementsByTagName("h1")[0].textContent;
+                    if (identifierToCheck == identifier) {
+                        validIdentifier = false;
+                    }
+                }
+            }
+            var h1 = document.createElement("h1");
+            h1.hidden = true; 
+            h1.innerHTML = identifier;
+            h1_2.textContent = identifier;
+            var h2 = document.createElement("h2");
+            h2.hidden = true;
+            var h3 = document.createElement("h3");
+            h3.hidden = true;
+            var h4 = document.createElement("h4");
+            h4.hidden = true;
+            var h5 = document.createElement("h5");
+            h5.hidden = true;
+            var h6 = document.createElement("h6");
+            h6.hidden = true;
+
+            var li2 = document.createElement("li");
+            li2.appendChild(p2);
+            li2.appendChild(h1);
+            li2.appendChild(h2);
+            li2.appendChild(h3);
+            li2.appendChild(h4);
+            li2.appendChild(h5);
+            li2.appendChild(h6);
+
+            lists[i].getElementsByTagName("ul")[0].appendChild(li2);
+        }
+    }
+
     //Add to main
     var p = document.createElement("p");
     p.textContent = "Untitled";
@@ -214,29 +352,25 @@ function addItem() {
     var deleteButton = document.createElement("div");
     deleteButton.className = "buttonWrapDeleteItem";
     deleteButton.hidden = true;
+    var svg = document.createElement("svg");
+    deleteButton.appendChild(svg);
+    svg.outerHTML = '<svg class="svgSizingChanges2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>';
     var li = document.createElement("li");
+    var h6 = document.createElement("h6");
+    h6.textContent = listIndexDestination.textContent;
+    h6.hidden = true;
     li.appendChild(div);
     li.appendChild(deleteButton);
     li.className = "contentsItem";
+    li.appendChild(h1_2);
+    li.appendChild(h6);
     
+    li.onclick = function() {
+        clickedItem(this);
+    }
 
     var ul = document.getElementById("listContents");
     ul.appendChild(li);
-
-    //Add to lists data
-    var listIndexDestination = document.getElementById("listHeading").getElementsByTagName("p")[0];
-    var lists = document.getElementsByClassName("list");
-    for (var i = 0; i < lists.length; i++){
-        var x = listIndexDestination.textContent;
-        var y = lists[i].getElementsByClassName("identifier")[0].textContent
-        if (x==y){
-            var p2 = document.createElement("p");
-            p2.textContent = "Untitled";
-            var li2 = document.createElement("li");
-            li2.appendChild(p2);
-            lists[i].getElementsByTagName("ul")[0].appendChild(li2);
-        }
-    }
 }
 
 function enterRemoveItemMode() {
@@ -246,7 +380,27 @@ function enterRemoveItemMode() {
     for (var i = 0; i < items.length; i++) {
         var deleteButton = items[i].getElementsByClassName("buttonWrapDeleteItem")[0];
         deleteButton.hidden = false;
+        //On-click functionality for each delete button
+        deleteButton.onclick = function() {
+            removeItem(this.parentElement);
+        }
     }
+
+    //override on-click for items to remove functionality
+    items = document.getElementsByClassName("contentsItem")
+    for (var i = 0; i < items.length; i++ ){
+        items[i].onclick = function() {};
+    }
+    
+    //Reset item view to default values
+    document.getElementById("viewerListIdentifier").textContent = "";
+    document.getElementById("viewerItemIdentifier").textContent = "";
+    document.getElementById("name").value = "";
+    document.getElementById("taskDescription").textContent = "";
+    document.getElementById("deadlineDate").value = "";
+    document.getElementById("deadlineTime").value = "";
+    document.getElementById("reminderDate").value = "";
+    document.getElementById("reminderTime").value = "";
 
     //Reveal exit-item-delete-mode button
     document.getElementById("buttonWrapExitDeleteItemMode").hidden = false;
@@ -254,8 +408,6 @@ function enterRemoveItemMode() {
     //Hide other buttons
     document.getElementById("mainButtonPlus").hidden = true;
     document.getElementById("mainButtonMinus").hidden = true;
-
-
 }
 
 function exitRemoveItemMode() {
@@ -267,12 +419,94 @@ function exitRemoveItemMode() {
         deleteButton.hidden = true;
     }
 
+    //override on-click for items to restore functionality
+    items = document.getElementsByClassName("contentsItem")
+    for (var i = 0; i < items.length; i++ ){
+        items[i].onclick = function() {
+            clickedItem(this);
+        };
+    }
+
     //Reveal exit-item-delete-mode button
     document.getElementById("buttonWrapExitDeleteItemMode").hidden = true;
 
     //Hide other buttons
     document.getElementById("mainButtonPlus").hidden = false;
     document.getElementById("mainButtonMinus").hidden = false;
+}
+
+function removeItem(x) {
+    //Remove from list data
+    var listIdentifier = document.getElementById("listHeading").getElementsByTagName("p")[0].textContent;
+    var lists = document.getElementsByClassName("list");
+    for (var i = 0; i < lists.length; i++) {
+        if (lists[i].getElementsByClassName("identifier")[0].textContent == listIdentifier) {
+            var items = lists[i].getElementsByTagName("ul")[0];
+            var itemsContents = lists[i].getElementsByTagName("ul")[0].getElementsByTagName("li");
+            for (var j = 0; j < itemsContents.length; j++) {
+                if (itemsContents[j].getElementsByTagName("h1")[0].textContent == x.getElementsByTagName("h1")[0].textContent) {
+                    items.removeChild(itemsContents[j]);
+                }
+            }
+            lists[i].getElementsByTagName("ul")[0].getElementsByTagName("h1").textContent;
+        }
+    }
+    //Remove from main window
+    var listContents = document.getElementById("listContents");
+    listContents.removeChild(x);
+}
+
+function updateItem() {
+    //Find item data location
+    var listToUpdate = null;
+    var lists = document.getElementsByClassName("list");
+    for (var i = 0; i < lists.length; i++){
+        if (lists[i].getElementsByClassName("identifier")[0].textContent == document.getElementById("viewerListIdentifier").textContent) {
+            var items = lists[i].getElementsByTagName("ul")[0].children;
+            for (var j = 0; j < items.length; j++) {
+                if (items[j].getElementsByTagName("h1")[0].textContent == document.getElementById("viewerItemIdentifier").textContent) {
+                    listToUpdate = items[j];
+                }
+            }
+        }
+    }
+
+    if (listToUpdate != null) {
+        listToUpdate.getElementsByTagName("p")[0].textContent = document.getElementById("name").value;
+        listToUpdate.getElementsByTagName("h2")[0].textContent = document.getElementById("taskDescription").value;
+        listToUpdate.getElementsByTagName("h3")[0].textContent = document.getElementById("deadlineDate").value;
+        listToUpdate.getElementsByTagName("h4")[0].textContent = document.getElementById("deadlineTime").value;
+        listToUpdate.getElementsByTagName("h5")[0].textContent = document.getElementById("reminderDate").value;
+        listToUpdate.getElementsByTagName("h6")[0].textContent = document.getElementById("reminderTime").value;
+        l = listToUpdate.parentElement.parentElement;
+        clickedList(l.getElementsByTagName("a")[0].textContent, l.getElementsByTagName("ul")[0], l.getElementsByClassName("identifier")[0].textContent);
+    }
+}
+
+function itemReorder() {
+    var listIdentifier = document.getElementById("listHeading").getElementsByTagName("p")[0].textContent;
+    var listToUpdate = null;
+    var lists = document.getElementsByClassName("list");
+
+    for (var i = 0; i < lists.length; i++) {
+        if (lists[i].getElementsByClassName("identifier")[0].textContent == listIdentifier) {
+            itemsFromData = lists[i].getElementsByTagName("ul")[0].getElementsByTagName("li");
+            itemsFromMain = document.getElementsByClassName("contentsItem");
+            for (var j = 0; j < itemsFromMain.length; j++) {
+                var itemIdentifier = itemsFromMain[j].getElementsByTagName("h1")[0].textContent;
+                for (var k = 0; k < itemsFromData.length; k++) {
+                    if (itemsFromData[k].getElementsByTagName("h1")[0].textContent == itemIdentifier) {
+                        itemsFromData[k].getElementsByTagName("p1")[0].textContent = j;
+                    }
+                }
+            }
+            break;
+        }
+    }  
+
+    itemsData = listToUpdate;
+
+    itemsMain = document.getElementById("listContents").children;
 }
 
 //Event Handler
@@ -337,6 +571,17 @@ function EventHandler() {
             });
             $( "#lists" ).disableSelection();
         } );
+
+        //Items Drag and Drop
+        $( function() {
+            $( "#listContents" ).sortable({
+                axis: 'y',
+                update: function( ) {
+                    itemReorder();
+                }
+            });
+            $( "#listContents" ).disableSelection();
+        });
 
         //Enter remove-item-mode button
         var enterRemoveItemModeButton = document.getElementById("mainButtonMinus");
