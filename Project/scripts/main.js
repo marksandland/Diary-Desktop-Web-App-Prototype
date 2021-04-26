@@ -315,6 +315,8 @@ function addItem() {
                     }
                 }
             }
+            var position = document.createElement("p1");
+            position.textContent = lists.length;
             var h1 = document.createElement("h1");
             h1.hidden = true; 
             h1.innerHTML = identifier;
@@ -332,6 +334,7 @@ function addItem() {
 
             var li2 = document.createElement("li");
             li2.appendChild(p2);
+            li2.appendChild(position);
             li2.appendChild(h1);
             li2.appendChild(h2);
             li2.appendChild(h3);
