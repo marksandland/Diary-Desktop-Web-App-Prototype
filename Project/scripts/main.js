@@ -554,53 +554,63 @@ function clickedToday() {
         var listsItems = lists[i].getElementsByTagName("ul")[0].getElementsByTagName("li");
         for (var j = 0; j < listsItems.length; j++) {
             if (listsItems[j].getElementsByTagName("h3")[0].textContent == todaysDate) {
-                items.push(listsItems[j]);
+                var text = listsItems[j].getElementsByTagName("p")[0].textContent;
+                var p = document.createElement("p");
+                p.textContent = text;
+                var div = document.createElement("div");
+                div.className = "listContentsContainer"
+                div.appendChild(p);
+
+                var deleteButton = document.createElement("div");
+                deleteButton.className = "buttonWrapDeleteItem";
+                deleteButton.hidden = true;
+
+                var svg = document.createElement("svg");
+                deleteButton.appendChild(svg);
+                svg.outerHTML = '<svg class="svgSizingChanges2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>';
+
+                var itemIdentifier = document.createElement("h1");
+                itemIdentifier.textContent = listsItems[j].getElementsByTagName("h1")[0].textContent;
+                itemIdentifier.hidden = true;
+
+                var listIdentifier = document.createElement("h6");
+                listIdentifier.textContent = document.getElementById("listHeading").getElementsByTagName("p")[0].innerHTML;
+                listIdentifier.hidden = true;
+
+                var li = document.createElement("li");
+                li.className = "contentsItem";
+                
+                li.appendChild(div);
+                li.appendChild(itemIdentifier);
+                li.appendChild(listIdentifier);
+
+                var x = lists[i].getElementsByClassName("identifier")[0].textContent;
+                
+                
+                li.onclick = todayItemClicked.bind(this, [x, lists]);
+                listContentsDestination.appendChild(li);
             }
 
         }
-    }
-
-    for (var i = 0; i < items.length; i++) {
-        var text = items[i].getElementsByTagName("p")[0].textContent;
-        var p = document.createElement("p");
-        p.textContent = text;
-        var div = document.createElement("div");
-        div.className = "listContentsContainer"
-        div.appendChild(p);
-
-        var deleteButton = document.createElement("div");
-        deleteButton.className = "buttonWrapDeleteItem";
-        deleteButton.hidden = true;
-
-        var svg = document.createElement("svg");
-        deleteButton.appendChild(svg);
-        svg.outerHTML = '<svg class="svgSizingChanges2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>';
-
-        var itemIdentifier = document.createElement("h1");
-        itemIdentifier.textContent = items[i].getElementsByTagName("h1")[0].textContent;
-        itemIdentifier.hidden = true;
-
-        var listIdentifier = document.createElement("h6");
-        listIdentifier.textContent = document.getElementById("listHeading").getElementsByTagName("p")[0].innerHTML;
-        listIdentifier.hidden = true;
-
-        var li = document.createElement("li");
-        li.className = "contentsItem";
-        
-        li.appendChild(div);
-        li.appendChild(deleteButton);
-        li.appendChild(itemIdentifier);
-        li.appendChild(listIdentifier);
-        li.onclick = function() {
-            clickedItem(this);
-        }
-        listContentsDestination.appendChild(li);
     }
 
     //Hide add and remove items buttons
     document.getElementById("mainButtonPlus").hidden = true;
     document.getElementById("mainButtonMinus").hidden = true;
 
+}
+
+function todayItemClicked(args) {
+    for (var k = 0; k < args[1].length; k++) {
+        if (args[1][k].getElementsByClassName("identifier")[0].textContent == args[0]) {
+            args[1][k].click();
+            break;
+        }
+    }
+}
+
+function deleteNotification(x) {
+    x.parentElement.removeChild(x);
 }
 
 //Event Handler

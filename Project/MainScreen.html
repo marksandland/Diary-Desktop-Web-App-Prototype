@@ -47,33 +47,33 @@
                     </div>
                     <ul hidden>
                         <li>
-                            <p>itemA</p>
+                            <p>Star Wars</p>
                             <p1>0</p1>
                             <h1 hidden>0</h1>
                             <h2 hidden>Task Description For ItemA</h2>
-                            <h3 hidden>01/02/2020</h3>
+                            <h3 hidden>2022-02-01</h3>
                             <h4 hidden>15:00</h4>
-                            <h5 hidden>01/01/2020</h5>
+                            <h5 hidden>2021-01-01</h5>
                             <h6 hidden>16:00</h6>
                         </li>
                         <li>
-                            <p>itemB</p>
+                            <p>Memento</p>
                             <p1>1</p1>
                             <h1 hidden>88</h1>
                             <h2 hidden>Task Description For ItemB</h2>
-                            <h3 hidden>02/02/2020</h3>
+                            <h3 hidden>2022-02-02</h3>
                             <h4 hidden>15:00</h4>
-                            <h5 hidden>02/01/2020</h5>
+                            <h5 hidden>2021-03-03</h5>
                             <h6 hidden>16:00</h6>
                         </li>
                         <li>
-                            <p>itemC</p>
+                            <p>The Dark Knight</p>
                             <p1>2</p1>
                             <h1 hidden>2</h1>
                             <h2 hidden>Task Description For ItemC</h2>
-                            <h3 hidden>03/02/2020</h3>
+                            <h3 hidden>2021-04-27</h3>
                             <h4 hidden>15:00</h4>
-                            <h5 hidden>03/01/2020</h5>
+                            <h5 hidden>2021-03-27</h5>
                             <h6 hidden>16:00</h6>
                         </li>
                     </ul>
@@ -87,7 +87,18 @@
                             <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
                         </svg>
                     </div>
-                    <ul hidden></ul>
+                    <ul hidden>
+                        <li>
+                            <p>Rocket League</p>
+                            <p1>0</p1>
+                            <h1 hidden>2</h1>
+                            <h2 hidden>Task Description For Rocket League</h2>
+                            <h3 hidden>2021-04-27</h3>
+                            <h4 hidden>15:00</h4>
+                            <h5 hidden>2021-03-27</h5>
+                            <h6 hidden>16:00</h6>
+                        </li>
+                    </ul>
                 </li>
                 
                 <li class="list">
@@ -125,7 +136,23 @@
             </div>
             <div id="notificationsMenu" hidden>
                 <h1>Notifications</h1>
-                <div class="notificationContainer"></div>
+                <div class="notificationContainer" onclick="deleteNotification(this)">
+                    <h1> Memento <small style="color: lightblue">- 03 / 03 / 2021</small> </h1>
+                    <div class="notificationDelete">
+                        <svg class="svgSizingChanges"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                          </svg>
+                    </div>
+                </div>
+                
+                <div class="notificationContainer" onclick="deleteNotification(this)">
+                    <h1> Star Wars <small style="color: lightblue">- 01 / 01 / 2021</small> </h1>
+                    <div class="notificationDelete">
+                        <svg class="svgSizingChanges"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                          </svg>
+                    </div>
+                </div>
             </div>
             
             <div id="rightPaneHeader" class="paneHeaderRight">

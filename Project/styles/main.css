@@ -317,15 +317,11 @@ ul {
   cursor: pointer;
 }
 
-.buttonWrapDeleteList:hover {
+.buttonWrapDeleteList:hover, .buttonWrapDeleteItem:hover, .notificationDelete:hover {
   background-color: #cc0000;
   cursor: pointer;
 }
 
-.buttonWrapDeleteItem:hover {
-  background-color: #cc0000;
-  cursor: pointer;
-}
 
 svg {
   position: fixed;
@@ -372,11 +368,33 @@ svg {
 }
 
 .notificationContainer {
-  width: 90%;
-  height: 20%;
+  width: 75%;
+  height: 15%;
   background-color:#4388CC;
   border:#1B3280 3px solid;
-  margin: 0 5% 0 5%;
+  margin: 0 5% 3% 5%;
+  padding: 0;
+}
+
+.notificationDelete {
+  width: 2vw;
+  height: 2vw;
+  background-color:red;
+  border:#1B3280 3px solid;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  left: 105%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.notificationContainer h1 {
+  float: left; 
+  margin: 0 0 0 3%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 0;
 }
 
