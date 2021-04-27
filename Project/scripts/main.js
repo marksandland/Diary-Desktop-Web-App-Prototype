@@ -238,6 +238,9 @@ function clickedList(listName, list, index) {
 
 //Clicked item
 function clickedItem(item) {
+    var pane = document.getElementById("sidenavRight");
+    pane.scrollTop = 0;
+
     //Get item name
     var name = item.getElementsByClassName("listContentsContainer")[0].getElementsByTagName("p")[0].textContent;
 
