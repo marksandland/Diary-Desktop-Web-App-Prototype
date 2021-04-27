@@ -41,10 +41,10 @@
 }
 
 #calendarPane {
-  height: 44%;
+  height: 45%;
   width: 35%;
   position:fixed;
-  top: 55.5%;
+  top: 55%;
   right: 0;
   background-color: #a6a6a6;
   overflow-x: hidden;
@@ -357,6 +357,30 @@ svg {
   cursor: pointer;
 }
 
+#notificationsMenu, #settingsMenu {
+  height: 50%;
+  width: 35%;
+  position:fixed;
+  top: 5%;
+  background-color: #a6a6a6;
+  overflow-x: hidden;
+  padding-top: 5;
+  border-bottom: 3px #1B3280 solid;
+  word-wrap: break-word;
+  scrollbar-color: darkblue lightblue;
+  scrollbar-width: 5px;
+}
+
+.notificationContainer {
+  width: 90%;
+  height: 20%;
+  background-color:#4388CC;
+  border:#1B3280 3px solid;
+  margin: 0 5% 0 5%;
+  padding: 0;
+}
+
+
 h1 {
   font-family: sans-serif;
   color: darkblue;
@@ -555,4 +579,10 @@ h1 {
   margin: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.backButtonContainer:hover {
+  cursor: pointer;
+  background:#2c66a0;
+  color: white;
 }

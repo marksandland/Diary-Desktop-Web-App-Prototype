@@ -279,6 +279,11 @@ function clickedItem(item) {
     document.getElementById("reminderDate").value = reminderDate;
     document.getElementById("reminderTime").value = reminderTime;
 
+    
+    //Hide overlapping menus
+    document.getElementById("notificationsMenu").hidden = true;
+    document.getElementById("settingsMenu").hidden = true;
+
 }
 
 //Add Item to List
@@ -402,7 +407,7 @@ function enterRemoveItemMode() {
     document.getElementById("viewerListIdentifier").textContent = "";
     document.getElementById("viewerItemIdentifier").textContent = "";
     document.getElementById("name").value = "";
-    document.getElementById("taskDescription").textContent = "";
+    document.getElementById("taskDescription").value = "";
     document.getElementById("deadlineDate").value = "";
     document.getElementById("deadlineTime").value = "";
     document.getElementById("reminderDate").value = "";
@@ -513,6 +518,16 @@ function itemReorder() {
     itemsData = listToUpdate;
 
     itemsMain = document.getElementById("listContents").children;
+}
+
+function viewNotificationsMenu() {
+    document.getElementById("notificationsMenu").hidden = false;
+    document.getElementById("settingsMenu").hidden = true;
+}
+
+function viewSettingsMenu() {
+    document.getElementById("settingsMenu").hidden = false;
+    document.getElementById("notificationsMenu").hidden = true;
 }
 
 //Event Handler
