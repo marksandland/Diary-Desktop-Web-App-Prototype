@@ -190,11 +190,6 @@ function clickedList(listName, list, index) {
 }
     listContents = sorted;
 
-
-
-
-
-
     //Load each item of the list
     for (var i = 0; i < listContents.length; i++) {
         var text = listContents[i].getElementsByTagName("p")[0].textContent;
@@ -530,6 +525,84 @@ function viewSettingsMenu() {
     document.getElementById("notificationsMenu").hidden = true;
 }
 
+function clickedToday() {
+    var listContentsDestination = document.getElementById("listContents");
+    document.getElementById("listHeading").getElementsByTagName("u")[0].textContent = "Today"
+    var listIndexDestination = document.getElementById("listHeading").getElementsByTagName("p")[0].innerHTML = -1;
+
+    //Prepare to load list contents
+    var listContentsDestination = document.getElementById("listContents");
+    var oldContents = listContentsDestination.getElementsByTagName("li");
+    //Remove current displayed data
+    for (var j = 0; j < oldContents.length; j+1) {
+        listContentsDestination.removeChild(oldContents[j]);
+    }
+    
+    //Get todays date
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if (dd<10) {dd='0'+dd;} 
+    if (mm<10) {mm='0'+mm;} 
+    var todaysDate = yyyy+"-"+mm+"-"+dd;
+
+    //Get all lists where deadline date is today
+    var lists = document.getElementsByClassName("list");
+    var items = [];
+    for (var i = 0; i < lists.length; i++) {
+        var listsItems = lists[i].getElementsByTagName("ul")[0].getElementsByTagName("li");
+        for (var j = 0; j < listsItems.length; j++) {
+            if (listsItems[j].getElementsByTagName("h3")[0].textContent == todaysDate) {
+                items.push(listsItems[j]);
+            }
+
+        }
+    }
+
+    for (var i = 0; i < items.length; i++) {
+        var text = items[i].getElementsByTagName("p")[0].textContent;
+        var p = document.createElement("p");
+        p.textContent = text;
+        var div = document.createElement("div");
+        div.className = "listContentsContainer"
+        div.appendChild(p);
+
+        var deleteButton = document.createElement("div");
+        deleteButton.className = "buttonWrapDeleteItem";
+        deleteButton.hidden = true;
+
+        var svg = document.createElement("svg");
+        deleteButton.appendChild(svg);
+        svg.outerHTML = '<svg class="svgSizingChanges2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>';
+
+        var itemIdentifier = document.createElement("h1");
+        itemIdentifier.textContent = items[i].getElementsByTagName("h1")[0].textContent;
+        itemIdentifier.hidden = true;
+
+        var listIdentifier = document.createElement("h6");
+        listIdentifier.textContent = document.getElementById("listHeading").getElementsByTagName("p")[0].innerHTML;
+        listIdentifier.hidden = true;
+
+        var li = document.createElement("li");
+        li.className = "contentsItem";
+        
+        li.appendChild(div);
+        li.appendChild(deleteButton);
+        li.appendChild(itemIdentifier);
+        li.appendChild(listIdentifier);
+        li.onclick = function() {
+            clickedItem(this);
+        }
+        listContentsDestination.appendChild(li);
+    }
+
+    //Hide add and remove items buttons
+    document.getElementById("mainButtonPlus").hidden = true;
+    document.getElementById("mainButtonMinus").hidden = true;
+
+}
+
 //Event Handler
 function EventHandler() {
     //Button Click Event Handler
@@ -556,10 +629,17 @@ function EventHandler() {
 
             //On-click functionality for each lists delete button
             var button = lists[i].getElementsByClassName("buttonWrapDeleteList")[0];
-            button.onclick = function() {
-                var list = this.parentElement;
-                removeList(list);
+            if (button != null) {
+                button.onclick = function() {
+                    var list = this.parentElement;
+                    removeList(list);
+                }
             }
+        }
+
+        //On-click functionality for today list
+        document.getElementsByClassName("today")[0].onclick = function() {
+            clickedToday();
         }
 
         //On-click functionality for button to exit delete-list mode
