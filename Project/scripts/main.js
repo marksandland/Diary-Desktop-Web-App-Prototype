@@ -19,6 +19,18 @@ function createAccount() {
     return true;
 }
 
+function login() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    if (username == "username" && password == "password") {
+        return true;
+    } 
+    else {
+        alert("Incorrect credentials");
+        return false;
+    }
+}
+
 //Add List
 function addList() {
     //Create a list
@@ -613,6 +625,17 @@ function deleteNotification(x) {
     x.parentElement.removeChild(x);
 }
 
+function openHelp() {
+    lists = document.getElementById("lists");
+    window.localStorage.setItem("listsInnerHTML", lists.innerHTML);
+    window.location.href='help.html'
+}
+
+function logout() {
+    window.location.href='index.html'
+    window.localStorage.removeItem("listsInnerHTML");
+}
+
 //Event Handler
 function EventHandler() {
     //Button Click Event Handler
@@ -706,18 +729,33 @@ function EventHandler() {
         }
 }
 
+//When leaving the page, save lists
+window.onbeforeunload = function(event)
+    {
+        window.localStorage.setItem("listsInnerHTML", document.getElementById("lists").innerHTML);
+    };
+
 //On load
 window.onload = function() { 
-    //When page is first loaded, hide buttons in the main window, and buttons only available in certain modes
-    if (document.getElementById("listHeading").textContent == "") {
-        document.getElementById("mainButtonPlus").hidden = true;
-        document.getElementById("mainButtonMinus").hidden = true;
-        document.getElementById("buttonWrapExitDeleteMode").hidden = true;
-        document.getElementById("buttonWrapExitDeleteItemMode").hidden = true;
-        var deleteListButtons = document.getElementsByClassName("buttonWrapDeleteList");
-        for (var i = 0; i < deleteListButtons.length; i++) {
-            deleteListButtons[i].hidden = true;
+    try {
+        //When page is first loaded, hide buttons in the main window, and buttons only available in certain modes
+        if (document.getElementById("listHeading").textContent == "") {
+            document.getElementById("mainButtonPlus").hidden = true;
+            document.getElementById("mainButtonMinus").hidden = true;
+            document.getElementById("buttonWrapExitDeleteMode").hidden = true;
+            document.getElementById("buttonWrapExitDeleteItemMode").hidden = true;
+            var deleteListButtons = document.getElementsByClassName("buttonWrapDeleteList");
+            for (var i = 0; i < deleteListButtons.length; i++) {
+                deleteListButtons[i].hidden = true;
+            }
         }
-    }   
-    EventHandler();
+        //Load lists from local storage
+        if (window.localStorage.getItem("listsInnerHTML") != null) {
+            console.log("storage found");
+            document.getElementById("lists").innerHTML = window.localStorage.getItem("listsInnerHTML");
+        }
+        //Event handler   
+        EventHandler();
+    }
+    catch{};
 }

@@ -40,7 +40,7 @@
                 <li class="list">
                     <p class="identifier" hidden>1</p>
                     <a id="listName">Movies</a>
-                    <div class="buttonWrapDeleteList">
+                    <div class="buttonWrapDeleteList" hidden>
                         <svg class="svgSizingChanges2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
                         </svg>
@@ -82,7 +82,7 @@
                 <li class="list">
                     <p class="identifier" hidden>2</p>
                     <a id="listName">Games</a>
-                    <div class="buttonWrapDeleteList">
+                    <div class="buttonWrapDeleteList" hidden>
                         <svg class="svgSizingChanges2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"viewBox="0 0 16 16">
                             <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
                         </svg>
@@ -104,7 +104,7 @@
                 <li class="list">
                     <p class="identifier" hidden>3</p>
                     <a id="listName">Shopping</a>
-                    <div class="buttonWrapDeleteList">
+                    <div class="buttonWrapDeleteList" hidden>
                         <svg class="svgSizingChanges2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
                         </svg>
@@ -114,7 +114,9 @@
             </ul>
         </div>
 
-        <div id="calendarPane"></div>
+        <div id="calendarPane">
+            <img src="images/Calendar.png"></img>
+        </div>
 
 
         <div id="sidenavRight">
@@ -133,11 +135,18 @@
           </form>
             <div id="settingsMenu" hidden>
                 <h1>Settings</h1>
+                <div class="settingWrap">
+                    <h2>Notifications</h2>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
             <div id="notificationsMenu" hidden>
                 <h1>Notifications</h1>
                 <div class="notificationContainer" onclick="deleteNotification(this)">
-                    <h1> Memento <small style="color: lightblue">- 03 / 03 / 2021</small> </h1>
+                    <h1> Memento <small>- 03 / 03 / 2021</small> </h1>
                     <div class="notificationDelete">
                         <svg class="svgSizingChanges"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -146,7 +155,7 @@
                 </div>
                 
                 <div class="notificationContainer" onclick="deleteNotification(this)">
-                    <h1> Star Wars <small style="color: lightblue">- 01 / 01 / 2021</small> </h1>
+                    <h1> Star Wars <small>- 01 / 01 / 2021</small> </h1>
                     <div class="notificationDelete">
                         <svg class="svgSizingChanges"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -156,7 +165,7 @@
             </div>
             
             <div id="rightPaneHeader" class="paneHeaderRight">
-                <div class= "buttonWrapLeft" onclick="window.location.href='index.html'">
+                <div class= "buttonWrapLeft" onclick="logout()">
                     <svg class="svgSizingChanges" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
                         <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
@@ -170,7 +179,7 @@
                       </svg>
                 </div>
 
-                <div class= "buttonWrapLeft" style= "right: 17%" onclick="window.location.href='help.html'">
+                <div class= "buttonWrapLeft" style= "right: 17%" onclick="openHelp()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question" viewBox="0 0 16 16">
                         <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
                       </svg>
@@ -191,19 +200,19 @@
             <h1 id="listHeading"><u contenteditable="true"></u><p hidden></p><h1 hidden></h1></h1>
             <ul id = "listContents"></ul>
 
-            <div id="mainButtonPlus" class= "buttonWrapMain" style="left: 5%;">
+            <div id="mainButtonPlus" class= "buttonWrapMain" style="left: 5%;" hidden>
                 <svg class="svgSizingChanges" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                 </svg>
             </div>
 
-            <div id="mainButtonMinus" class= "buttonWrapMain" style= "left: 10.5%;">
+            <div id="mainButtonMinus" class= "buttonWrapMain" style= "left: 10.5%;" hidden>
                 <svg class="svgSizingChanges" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
                     <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
                 </svg>
             </div>
 
-            <div id="buttonWrapExitDeleteItemMode" style= "left: 5%;">
+            <div id="buttonWrapExitDeleteItemMode" style= "left: 5%;" hidden>
                 <svg class="svgSizingChanges" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
                     <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
                 </svg>
