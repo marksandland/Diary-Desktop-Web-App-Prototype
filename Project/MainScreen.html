@@ -1,7 +1,7 @@
 <hmtl>
     <head>
         <title>Task Manager</title>
-        <meta http-equiv="Content-Type" content="text/html"; charset="=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
         <link href="styles/main.css" rel="stylesheet">
         <script src="scripts/main.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -23,7 +23,7 @@
                     </svg>
                 </div>   
                 
-                <div id="buttonWrapExitDeleteMode">
+                <div id="buttonWrapExitDeleteMode" hidden>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
                         <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
                     </svg>
@@ -115,7 +115,7 @@
         </div>
 
         <div id="calendarPane">
-            <img src="images/Calendar.png"></img>
+            <img id="calendar" src="images/Calendar.png"></img>
         </div>
 
 
@@ -136,27 +136,76 @@
             <div id="settingsMenu" hidden>
                 <h1>Settings</h1>
                 <div class="settingWrap">
-                    <h2>Notifications</h2>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
+                    <h2>Notifications
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </h2>
+                    <h2>Language
+                        <select name="language" id="language" onchange="changeLanguage(this);">
+                        <option value="English">English</option>
+                        <option value="French">French</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Spanish">Spanish</option>
+                      </select></h2>
+                    <h2>Background #1</h2>
+                    <div class="colorPickWrap">
+                        <div class="colorPick" style="background-color: #dcdadc;" onclick="changeColor(0,'#dcdadc')"></div>
+                        <div class="colorPick" style="background-color: #b6b5b7;" onclick="changeColor(0,'#b6b5b7')"></div>
+                        <div class="colorPick" style="background-color: #ffffff;" onclick="changeColor(0,'#ffffff')"></div>
+                        <div class="colorPick" style="background-color: #4c9697;" onclick="changeColor(0,'#4c9697')"></div>
+                        <div class="colorPick" style="background-color: #ff9966;" onclick="changeColor(0,'#ff9966')"></div>
+                        <div class="colorPick" style="background-color: #ffccff;" onclick="changeColor(0,'#ffccff')"></div>
+                        <div class="colorPick" style="background-color: #ffff99;" onclick="changeColor(0,'#ffff99')"></div>
+                    </div>
+                    <h2>Background #2</h2>
+                    <div class="colorPickWrap">
+                        <div class="colorPick" style="background-color: #dcdadc;" onclick="changeColor(1,'#dcdadc')"></div>
+                        <div class="colorPick" style="background-color: #b6b5b7;" onclick="changeColor(1,'#b6b5b7')"></div>
+                        <div class="colorPick" style="background-color: #ffffff;" onclick="changeColor(1,'#ffffff')"></div>
+                        <div class="colorPick" style="background-color: #4c9697;" onclick="changeColor(1,'#4c9697')"></div>
+                        <div class="colorPick" style="background-color: #ff9966;" onclick="changeColor(1,'#ff9966')"></div>
+                        <div class="colorPick" style="background-color: #ffccff;" onclick="changeColor(1,'#ffccff')"></div>
+                        <div class="colorPick" style="background-color: #ffff99;" onclick="changeColor(1,'#ffff99')"></div>
+                    </div>
+                    <h2>Foreground #1</h2>
+                    <div class="colorPickWrap">
+                        <div class="colorPick" style="background-color: #cc0000;" onclick="changeColor(2,'#cc0000')"></div>
+                        <div class="colorPick" style="background-color: #ff6666;" onclick="changeColor(2,'#ff6666')"></div>
+                        <div class="colorPick" style="background-color: #cc33cc;" onclick="changeColor(2,'#cc33cc')"></div>
+                        <div class="colorPick" style="background-color: #1B3280;" onclick="changeColor(2,'#1B3280')"></div>
+                        <div class="colorPick" style="background-color: #4388CC;" onclick="changeColor(2,'#4388CC')"></div>
+                        <div class="colorPick" style="background-color: #99ff99;" onclick="changeColor(2,'#99ff99')"></div>
+                        <div class="colorPick" style="background-color: #009900;" onclick="changeColor(2,'#009900')"></div>
+                    </div>
+                    <h2>Foreground #2</h2>
+                    <div class="colorPickWrap">
+                        <div class="colorPick" style="background-color: #cc0000;" onclick="changeColor(3,'#cc0000')"></div>
+                        <div class="colorPick" style="background-color: #ff6666;" onclick="changeColor(3,'#ff6666')"></div>
+                        <div class="colorPick" style="background-color: #cc33cc;" onclick="changeColor(3,'#cc33cc')"></div>
+                        <div class="colorPick" style="background-color: #1B3280;" onclick="changeColor(3,'#1B3280')"></div>
+                        <div class="colorPick" style="background-color: #4388CC;" onclick="changeColor(3,'#4388CC')"></div>
+                        <div class="colorPick" style="background-color: #99ff99;" onclick="changeColor(3,'#99ff99')"></div>
+                        <div class="colorPick" style="background-color: #009900;" onclick="changeColor(3,'#009900')"></div>
+                    </div>
+                    
                 </div>
             </div>
             <div id="notificationsMenu" hidden>
                 <h1>Notifications</h1>
-                <div class="notificationContainer" onclick="deleteNotification(this)">
+                <div class="notificationContainer">
                     <h1> Memento <small>- 03 / 03 / 2021</small> </h1>
-                    <div class="notificationDelete">
+                    <div class="notificationDelete" onclick="deleteNotification(this.parentElement)">
                         <svg class="svgSizingChanges"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                           </svg>
                     </div>
                 </div>
                 
-                <div class="notificationContainer" onclick="deleteNotification(this)">
+                <div class="notificationContainer">
                     <h1> Star Wars <small>- 01 / 01 / 2021</small> </h1>
-                    <div class="notificationDelete">
+                    <div class="notificationDelete"  onclick="deleteNotification(this.parentElement)">
                         <svg class="svgSizingChanges"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                           </svg>

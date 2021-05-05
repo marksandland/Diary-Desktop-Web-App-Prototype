@@ -104,6 +104,12 @@ function addList() {
         document.getElementById("mainButtonPlus").hidden = false;
         document.getElementById("mainButtonMinus").hidden = false; 
     };
+
+    //Colours
+    var text = $("a")
+    for (var i = 0; i < text.length; i++) {
+        text[i].style.color = window.localStorage.getItem("colours3");
+    }
 }
 
 //Remove List
@@ -241,6 +247,25 @@ function clickedList(listName, list, index) {
     }
     //Hide buttons
     document.getElementById("buttonWrapExitDeleteItemMode").hidden = true;
+    //Load Colour Settings
+    if (window.localStorage.getItem("colours2") != null){
+        var items = document.getElementsByClassName("listContentsContainer");
+        for (var i = 0; i < items.length; i++) {
+            items[i].style.background = window.localStorage.getItem("colours2");
+        }
+    }
+
+    if (window.localStorage.getItem("colours3") != null){
+        var items = document.getElementsByClassName("listContentsContainer");
+        for (var i = 0; i < items.length; i++) {
+            items[i].style.color = window.localStorage.getItem("colours3");
+            items[i].style.borderColor = window.localStorage.getItem("colours3");
+        }
+        var text = $("p")
+        for (var i = 0; i < text.length; i++) {
+            text[i].style.color = window.localStorage.getItem("colours3");
+        }
+    }
 }
 
 //Clicked item
@@ -389,6 +414,27 @@ function addItem() {
 
     var ul = document.getElementById("listContents");
     ul.appendChild(li);
+
+    //Load Colour Settings
+    if (window.localStorage.getItem("colours2") != null){
+        var items = document.getElementsByClassName("listContentsContainer");
+        for (var i = 0; i < items.length; i++) {
+            items[i].style.background = window.localStorage.getItem("colours2");
+        }
+    }
+
+    if (window.localStorage.getItem("colours3") != null){
+        var items = document.getElementsByClassName("listContentsContainer");
+        for (var i = 0; i < items.length; i++) {
+            items[i].style.color = window.localStorage.getItem("colours3");
+            items[i].style.borderColor = window.localStorage.getItem("colours3");
+        }
+        var text = $("p")
+        for (var i = 0; i < text.length; i++) {
+            text[i].style.color = window.localStorage.getItem("colours3");
+        }
+    }
+
 }
 
 function enterRemoveItemMode() {
@@ -539,7 +585,7 @@ function viewSettingsMenu() {
 
 function clickedToday() {
     var listContentsDestination = document.getElementById("listContents");
-    document.getElementById("listHeading").getElementsByTagName("u")[0].textContent = "Today"
+    document.getElementById("listHeading").getElementsByTagName("u")[0].textContent = document.getElementsByClassName("today")[0].getElementsByTagName("a")[0].textContent;
     var listIndexDestination = document.getElementById("listHeading").getElementsByTagName("p")[0].innerHTML = -1;
 
     //Prepare to load list contents
@@ -628,12 +674,16 @@ function deleteNotification(x) {
 function openHelp() {
     lists = document.getElementById("lists");
     window.localStorage.setItem("listsInnerHTML", lists.innerHTML);
-    window.location.href='help.html'
+    window.location.href='help.html';
 }
 
 function logout() {
     window.location.href='index.html'
     window.localStorage.removeItem("listsInnerHTML");
+    window.localStorage.removeItem("colours0");
+    window.localStorage.removeItem("colours1");
+    window.localStorage.removeItem("colours2");
+    window.localStorage.removeItem("colours3");
 }
 
 //Event Handler
@@ -729,6 +779,156 @@ function EventHandler() {
         }
 }
 
+//Buttons that change the color scheme
+function changeColor(i, color) {
+    switch (i){
+        case 0:
+            document.getElementById("main").style.background = color;
+            window.localStorage.setItem("colours0", color);
+            break;
+        case 1:
+            document.getElementById("sidenavLeft").style.background = color;
+            document.getElementById("sidenavRight").style.background = color;
+            document.getElementById("settingsMenu").style.background = color;
+            document.getElementById("notificationsMenu").style.background = color;
+            document.getElementById("calendarPane").style.background = color;
+            document.getElementById("rightPaneHeader").style.background = color;
+            document.getElementById("leftPaneHeader").style.background = color;
+            window.localStorage.setItem("colours1", color);
+            break;
+        case 2:
+            document.getElementById("mainButtonPlus").style.backgroundColor = color;
+            document.getElementById("mainButtonMinus").style.backgroundColor = color;
+            document.getElementById("updateItemButton").style.backgroundColor = window.localStorage.getItem("colours2");
+            var buttons = document.getElementsByClassName("buttonWrapLeft");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].style.background = color;
+            }
+
+            var items = document.getElementsByClassName("listContentsContainer");
+            for (var i = 0; i < items.length; i++) {
+                items[i].style.background = color;
+            }
+            var notifications = document.getElementsByClassName("notificationContainer");
+            for (var i = 0; i < notifications.length; i++) {
+                notifications[i].style.background = color;
+            }
+            window.localStorage.setItem("colours2", color);
+            break;
+        case 3:
+            document.getElementById("mainButtonPlus").style.borderColor = color;
+            document.getElementById("mainButtonPlus").style.color = color;
+            document.getElementById("mainButtonMinus").style.borderColor = color;
+            document.getElementById("mainButtonMinus").style.color = color;
+            var buttons = document.getElementsByClassName("buttonWrapLeft");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].style.color = color;
+                buttons[i].style.borderColor = color;
+            }
+
+            var items = document.getElementsByClassName("listContentsContainer");
+            for (var i = 0; i < items.length; i++) {
+                items[i].style.color = color;
+                items[i].style.borderColor = color;
+            }
+
+            var text = $("h1, h2, a, p")
+            for (var i = 0; i < text.length; i++) {
+                text[i].style.color = color;
+            }
+
+            document.getElementById("main").style.borderColor = color;
+            document.getElementById("calendar").style.borderColor = color;
+            document.getElementById("calendarPane").style.borderColor = color;
+            document.getElementById("sidenavRight").style.borderColor = color;
+            document.getElementById("rightPaneHeader").style.borderColor = color;
+            document.getElementById("settingsMenu").style.borderColor = color;
+            document.getElementById("notificationsMenu").style.borderColor = color;
+            window.localStorage.setItem("colours3", color);
+            break;
+        
+
+        default:
+            console.log("Invalid Aspect")
+    }
+
+}
+
+function changeLanguage(lang) {
+    window.localStorage.setItem("language", lang.value);
+    loadLanguage();
+}
+
+function loadLanguage() {
+    if (window.localStorage.getItem("language") != null) {
+        console.log("language found")
+        document.getElementById("language").value = window.localStorage.getItem("language");
+        switch (window.localStorage.getItem("language")) {
+            case "English":
+                document.getElementsByClassName("today")[0].getElementsByTagName("a")[0].textContent = "Today";
+                document.getElementById("notificationsMenu").getElementsByTagName("h1")[0].textContent = "Notifications"
+                document.getElementById("settingsMenu").getElementsByTagName("h1")[0].textContent = "Settings"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[0].childNodes[0].nodeValue = "Notifications"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[1].childNodes[0].nodeValue = "Language"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[2].childNodes[0].nodeValue = "Background #1"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[3].childNodes[0].nodeValue = "Background #2"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[4].childNodes[0].nodeValue = "Foreground #1"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[5].childNodes[0].nodeValue = "Foreground #2"
+                document.getElementById("name").setAttribute("placeholder", "Name");
+                document.getElementById("taskDescription").setAttribute("placeholder", "Task Description");
+                document.getElementById("itemForm").getElementsByTagName("h2")[0].textContent = "Deadline";
+                document.getElementById("itemForm").getElementsByTagName("h2")[1].textContent = "Remind me at";
+                break;
+            case "French":
+                document.getElementsByClassName("today")[0].getElementsByTagName("a")[0].textContent = "Aujourd'hui";
+                document.getElementById("notificationsMenu").getElementsByTagName("h1")[0].textContent = "Notifications"
+                document.getElementById("settingsMenu").getElementsByTagName("h1")[0].textContent = "Paramètres"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[0].childNodes[0].nodeValue = "Notifications"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[1].childNodes[0].nodeValue = "Langue"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[2].childNodes[0].nodeValue = "Contexte #1"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[3].childNodes[0].nodeValue = "Contexte #2"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[4].childNodes[0].nodeValue = "Premier Plan #1"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[5].childNodes[0].nodeValue = "Premier Plan #2"
+                document.getElementById("name").setAttribute("placeholder", "Nom");
+                document.getElementById("taskDescription").setAttribute("placeholder", "Description de la tâche");
+                document.getElementById("itemForm").getElementsByTagName("h2")[0].textContent = "Date limite";
+                document.getElementById("itemForm").getElementsByTagName("h2")[1].textContent = "Rappelle-moi à";
+                break;
+            case "Italian":
+                document.getElementsByClassName("today")[0].getElementsByTagName("a")[0].textContent = "Oggi";
+                document.getElementById("notificationsMenu").getElementsByTagName("h1")[0].textContent = "Notifiche"
+                document.getElementById("settingsMenu").getElementsByTagName("h1")[0].textContent = "Opzioni"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[0].childNodes[0].nodeValue = "Notifiche"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[1].childNodes[0].nodeValue = "linguaggio"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[2].childNodes[0].nodeValue = "Sfondo #1"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[3].childNodes[0].nodeValue = "Sfondo #2"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[4].childNodes[0].nodeValue = "Primo piano #1"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[5].childNodes[0].nodeValue = "Primo piano #2"
+                document.getElementById("name").setAttribute("placeholder", "Nome");
+                document.getElementById("taskDescription").setAttribute("placeholder", "Descrizione del compito");
+                document.getElementById("itemForm").getElementsByTagName("h2")[0].textContent = "Scadenza";
+                document.getElementById("itemForm").getElementsByTagName("h2")[1].textContent = "Ricordamelo a";
+                break;
+            case "Spanish":
+                document.getElementsByClassName("today")[0].getElementsByTagName("a")[0].textContent = "Hoy";
+                document.getElementById("notificationsMenu").getElementsByTagName("h1")[0].textContent = "Notificaciones"
+                document.getElementById("settingsMenu").getElementsByTagName("h1")[0].textContent = "Ajustes"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[0].childNodes[0].nodeValue = "Notificaciones"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[1].childNodes[0].nodeValue = "Idioma"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[2].childNodes[0].nodeValue = "Fondo #1"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[3].childNodes[0].nodeValue = "Fondo #2"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[4].childNodes[0].nodeValue = "Primer Plano #1"
+                document.getElementById("settingsMenu").getElementsByTagName("h2")[5].childNodes[0].nodeValue = "Primer Plano #2"
+                document.getElementById("name").setAttribute("placeholder", "Nombre");
+                document.getElementById("taskDescription").setAttribute("placeholder", "Descripción de la tarea");
+                document.getElementById("itemForm").getElementsByTagName("h2")[0].textContent = "Plazo";
+                document.getElementById("itemForm").getElementsByTagName("h2")[1].textContent = "Recuérdame en";
+                break;
+        }
+    }
+
+}
+
 //When leaving the page, save lists
 window.onbeforeunload = function(event)
     {
@@ -738,6 +938,76 @@ window.onbeforeunload = function(event)
 //On load
 window.onload = function() { 
     try {
+        //Load lists from local storage
+        if (window.localStorage.getItem("listsInnerHTML") != null) {
+            console.log("data found");
+            document.getElementById("lists").innerHTML = window.localStorage.getItem("listsInnerHTML");
+        }
+        //Load Colour Settings
+        if (window.localStorage.getItem("colours0") != null){
+            console.log("colour0 found");
+            document.getElementById("main").style.background = window.localStorage.getItem("colours0");
+        }
+        if (window.localStorage.getItem("colours1") != null){
+            console.log("colour1 found");
+            document.getElementById("sidenavLeft").style.background = window.localStorage.getItem("colours1");
+            document.getElementById("sidenavRight").style.background = window.localStorage.getItem("colours1");
+            document.getElementById("settingsMenu").style.background = window.localStorage.getItem("colours1");
+            document.getElementById("notificationsMenu").style.background = window.localStorage.getItem("colours1");
+            document.getElementById("calendarPane").style.background = window.localStorage.getItem("colours1");
+            document.getElementById("rightPaneHeader").style.background = window.localStorage.getItem("colours1");
+            document.getElementById("leftPaneHeader").style.background = window.localStorage.getItem("colours1");
+        }
+        if (window.localStorage.getItem("colours2") != null){
+            console.log("colour2 found");
+            document.getElementById("mainButtonPlus").style.backgroundColor = window.localStorage.getItem("colours2");
+            document.getElementById("mainButtonMinus").style.backgroundColor = window.localStorage.getItem("colours2");
+            document.getElementById("updateItemButton").style.backgroundColor = window.localStorage.getItem("colours2");
+            var buttons = document.getElementsByClassName("buttonWrapLeft");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].style.background = window.localStorage.getItem("colours2");
+            }
+            var items = document.getElementsByClassName("listContentsContainer");
+            for (var i = 0; i < items.length; i++) {
+                items[i].style.background = window.localStorage.getItem("colours2");
+            }
+
+            var notifications = document.getElementsByClassName("notificationContainer");
+            for (var i = 0; i < notifications.length; i++) {
+                notifications[i].style.background = window.localStorage.getItem("colours2");
+            }
+        }
+        if (window.localStorage.getItem("colours3") != null){
+            console.log("colour3 found");
+            document.getElementById("mainButtonPlus").style.borderColor = window.localStorage.getItem("colours3");
+            document.getElementById("mainButtonPlus").style.color = window.localStorage.getItem("colours3");
+            document.getElementById("mainButtonMinus").style.borderColor = window.localStorage.getItem("colours3");
+            document.getElementById("mainButtonMinus").style.color = window.localStorage.getItem("colours3");
+            var buttons = document.getElementsByClassName("buttonWrapLeft");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].style.color = window.localStorage.getItem("colours3");
+                buttons[i].style.borderColor = window.localStorage.getItem("colours3");
+            }
+
+            var items = document.getElementsByClassName("listContentsContainer");
+            for (var i = 0; i < items.length; i++) {
+                items[i].style.color = window.localStorage.getItem("colours3");
+                items[i].style.borderColor = window.localStorage.getItem("colours3");
+            }
+
+            var text = $("h1, h2, a, p")
+            for (var i = 0; i < text.length; i++) {
+                text[i].style.color = window.localStorage.getItem("colours3");
+            }
+
+            document.getElementById("main").style.borderColor = window.localStorage.getItem("colours3");
+            document.getElementById("calendar").style.borderColor = window.localStorage.getItem("colours3");
+            document.getElementById("calendarPane").style.borderColor = window.localStorage.getItem("colours3");
+            document.getElementById("sidenavRight").style.borderColor = window.localStorage.getItem("colours3");
+            document.getElementById("rightPaneHeader").style.borderColor = window.localStorage.getItem("colours3");
+            document.getElementById("settingsMenu").style.borderColor = window.localStorage.getItem("colours3");
+            document.getElementById("notificationsMenu").style.borderColor = window.localStorage.getItem("colours3");
+        }
         //When page is first loaded, hide buttons in the main window, and buttons only available in certain modes
         if (document.getElementById("listHeading").textContent == "") {
             document.getElementById("mainButtonPlus").hidden = true;
@@ -749,13 +1019,11 @@ window.onload = function() {
                 deleteListButtons[i].hidden = true;
             }
         }
-        //Load lists from local storage
-        if (window.localStorage.getItem("listsInnerHTML") != null) {
-            console.log("storage found");
-            document.getElementById("lists").innerHTML = window.localStorage.getItem("listsInnerHTML");
-        }
+
+        //Language
+        loadLanguage();
         //Event handler   
         EventHandler();
     }
-    catch{};
+    catch (e){console.log(e)};
 }

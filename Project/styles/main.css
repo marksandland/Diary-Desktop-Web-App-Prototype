@@ -1,16 +1,16 @@
   
-#sidenavLeft::-webkit-scrollbar,#sidenavRight::-webkit-scrollbar {
+#sidenavLeft::-webkit-scrollbar, #sidenavRight::-webkit-scrollbar, #notificationsMenu::-webkit-scrollbar, #settingsMenu::-webkit-scrollbar {
   width: 5px;
 }
 
-#sidenavLeft::-webkit-scrollbar-track, #sidenavRight::-webkit-scrollbar-track {
+#sidenavLeft::-webkit-scrollbar-track, #sidenavRight::-webkit-scrollbar-track, #notificationsMenu::-webkit-scrollbar-track, #settingsMenu::-webkit-scrollbar-track {
   background: lightblue;
 }
 
-#sidenavLeft::-webkit-scrollbar-thumb, #sidenavRight::-webkit-scrollbar-thumb {
-  background-color: blue;
+#sidenavLeft::-webkit-scrollbar-thumb, #sidenavRight::-webkit-scrollbar-thumb, #notificationsMenu::-webkit-scrollbar-thumb, #settingsMenu::-webkit-scrollbar-thumb {
+  background-color: black;
   border-radius: 5px;
-  border: 1px solid darkblue;
+  border: 1px solid black;
 }
   
 #sidenavLeft {
@@ -23,7 +23,7 @@
   overflow-x: hidden;
   padding-top: 5;
   word-wrap: break-word;
-  scrollbar-color: darkblue lightblue;
+  scrollbar-color: black lightblue;
   scrollbar-width: 5px;
 } 
 
@@ -50,7 +50,7 @@
   overflow-x: hidden;
   padding-top: 5;
   word-wrap: break-word;
-  scrollbar-color: darkblue lightblue;
+  scrollbar-color: black lightblue;
   scrollbar-width: 5px;
 }
 
@@ -76,7 +76,7 @@
   padding-top: 5;
   border-bottom: 3px #1B3280 solid;
   word-wrap: break-word;
-  scrollbar-color: darkblue lightblue;
+  scrollbar-color: black lightblue;
   scrollbar-width: 5px;
 } 
 
@@ -123,7 +123,7 @@
   margin: 0 0 2% 0;
   position: relative;
   resize: none;
-  scrollbar-color: darkblue lightblue;
+  scrollbar-color: black lightblue;
   scrollbar-width: 5px;
 }
 
@@ -375,15 +375,33 @@ svg {
   padding-top: 5;
   border-bottom: 3px #1B3280 solid;
   word-wrap: break-word;
-  scrollbar-color: darkblue lightblue;
+  scrollbar-color: black lightblue;
   scrollbar-width: 5px;
 }
 
 #settingsMenu h2 {
   font-family: sans-serif;
   padding: 0;
-  margin: 0 0 0 3%;
+  margin: 0 0 3% 3%;
   color: darkblue;
+}
+
+.colourPickWrap {
+  position: relative;
+}
+
+.colorPick {
+  display: inline-block;
+  position: relative;
+  padding: 0;
+  margin: 0 0 3% 3%;
+  width: 45px;
+  height: 45px;
+  border: 3px black solid;
+}
+
+.colorPick:hover {
+  cursor: pointer;
 }
 
 .notificationContainer {
@@ -425,7 +443,17 @@ h1 {
 }
 
 small {
-  color: lightblue
+  color: white;
+}
+
+select {
+  position: absolute;
+  width: 250px;
+  height: 40px;
+  font-size: 30px;
+  padding: 0;
+  margin-left: 5%;
+  transform: translateY(-15%);
 }
 
 @media screen and (max-height: 450px) {
@@ -438,7 +466,7 @@ small {
 .loginBody {
   background-color: #d9d9d9;
   word-wrap: break-word;
-  scrollbar-color: darkblue lightblue;
+  scrollbar-color: black lightblue;
   scrollbar-width: 5px;
 }
 
@@ -538,6 +566,10 @@ small {
 
 /* Help screen stuff */
 
+#helpHeading {
+  font-size: 60px; margin: 20px 0 30px 0;
+}
+
 #videoContainer {
   width: 50%;
   height: 50%;
@@ -596,9 +628,9 @@ small {
 }
 
 .loginBody::-webkit-scrollbar-thumb {
-  background-color: blue;
+  background-color: black;
   border-radius: 5px;
-  border: 1px solid darkblue;
+  border: 1px solid black;
 }
 
 .backButtonContainer {
@@ -631,9 +663,11 @@ small {
 /* toggle switch */
 .switch {
   position: absolute;
-  float: left;
   width: 60px;
   height: 34px;
+  margin: 0 0 0 20px;
+  padding: 0;
+  transform: translateY(-5%);
 }
 
 .switch input {
