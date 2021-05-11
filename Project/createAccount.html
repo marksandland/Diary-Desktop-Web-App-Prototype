@@ -12,14 +12,14 @@
         <form id="createAccountForm" action="index.html" onsubmit="return createAccount()">
             <h1>Create Account</h1>
             <input type="text" id="email" name="email" placeholder="Email address">
-            <p id="emailError">Invalid Email Address</p>
+            <p id="emailError" style="visibility: hidden;">Invalid Email Address</p>
             <input type="text" id="username" name="username" placeholder="Username">
-            <p id="usernameError">Username already taken</p>
-            <input type="password" placeholder="Password">
-            <p id="passwordError">Must be 8-20 characters and contain at least 1 number</p>
-            <input type="password" placeholder="Re-enter password">
-            <p id="ReEnterPasswordError">Passwords do not match</p>
-            <input class="submit"type="submit" value="Create Account"><br/><br/>
+            <p id="usernameError" style="visibility: hidden;">Username must be 3-20 characters</p>
+            <input type="password" id="password" placeholder="Password">
+            <p id="passwordError" style="visibility: hidden;">Must be 8-20 characters</p>
+            <input type="password" id="passwordConfirm" placeholder="Re-enter password">
+            <p id="passwordConfirmError" style="visibility: hidden;">Passwords do not match</p>
+            <input class="submit" type="submit" value="Create Account"><br/><br/>
             <a href="index.html"><u>back to login</u></a>
           </form>
     </body>

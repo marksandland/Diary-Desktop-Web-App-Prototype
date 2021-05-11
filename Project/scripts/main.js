@@ -4,7 +4,7 @@ function passwordReset() {
     var x = document.getElementById("email"); 
 
     if (x.value.length < 1) {
-        alert("Invalid email address");
+        document.getElementById("loginForm").getElementsByTagName("p")[0].hidden = false;
         return false;
     }
     else {
@@ -15,8 +15,53 @@ function passwordReset() {
 
 //Create Account
 function createAccount() {
-    alert("Account created!")
-    return true;
+    var returnValue = true;
+    //Email Field
+    if (document.getElementById("email").value == "") {
+        document.getElementById("emailError").style.visibility = "visible";
+        returnValue = false;
+    }
+    else {
+        document.getElementById("emailError").style.visibility = "hidden";
+    }
+    //Username Field
+    if (document.getElementById("username").value.length < 3 || document.getElementById("username").value.length > 20) {
+        document.getElementById("usernameError").style.visibility = "visible";
+        returnValue = false;
+    }
+    else {
+        document.getElementById("usernameError").style.visibility = "hidden";
+    }
+    //Password Field
+    if (document.getElementById("password").value.length < 8 || document.getElementById("password").value.length > 20) {
+        document.getElementById("passwordError").style.visibility = "visible";
+        returnValue = false;
+    }
+    else {  
+        document.getElementById("passwordError").style.visibility = "hidden";
+    }
+    //Password Confirmation Field
+    if (document.getElementById("passwordConfirm").value != document.getElementById("password").value) {
+        document.getElementById("passwordConfirmError").style.visibility = "visible";
+        returnValue = false;
+    }
+    else {  
+        document.getElementById("passwordConfirmError").style.visibility = "hidden";
+    }
+    if (returnValue == true) {
+        document.getElementById("emailError").style.visibility = "hidden";
+        document.getElementById("usernameError").style.visibility = "hidden";
+        document.getElementById("passwordError").style.visibility = "hidden";
+        document.getElementById("passwordConfirmError").style.visibility = "hidden";
+        setTimeout(function () { alert("Account created!"); }, 1);
+        
+        return true;
+    }
+    return false;
+
+
+
+    
 }
 
 function login() {
@@ -26,7 +71,7 @@ function login() {
         return true;
     } 
     else {
-        alert("Incorrect credentials");
+        document.getElementById("loginForm").getElementsByTagName("p")[0].hidden = false;
         return false;
     }
 }
@@ -667,6 +712,105 @@ function todayItemClicked(args) {
     }
 }
 
+function clickedThisWeek() {
+    var listContentsDestination = document.getElementById("listContents");
+    document.getElementById("listHeading").getElementsByTagName("u")[0].textContent = document.getElementsByClassName("thisWeek")[0].getElementsByTagName("a")[0].textContent;
+    var listIndexDestination = document.getElementById("listHeading").getElementsByTagName("p")[0].innerHTML = -1;
+
+    //Prepare to load list contents
+    var listContentsDestination = document.getElementById("listContents");
+    var oldContents = listContentsDestination.getElementsByTagName("li");
+    //Remove current displayed data
+    for (var j = 0; j < oldContents.length; j+1) {
+        listContentsDestination.removeChild(oldContents[j]);
+    }
+    
+    //Get date of monday this week
+    var monday = new Date();
+    var day = monday.getDay(),
+    diff = monday.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+    monday.setDate(diff);
+    var days = [];
+    for (var i = 0; i < 7; i++) {
+        var tempDate = new Date();
+        tempDate.setDate(monday.getDate() + i);
+        days.push(tempDate);
+    }
+
+    for (var i = 0; i < days.length; i++) {
+        console.log(days[i]);
+    }
+
+    
+
+
+    //Get all lists where deadline date is today
+    var lists = document.getElementsByClassName("list");
+    for (var i = 0; i < lists.length; i++) {
+        var listsItems = lists[i].getElementsByTagName("ul")[0].getElementsByTagName("li");
+        for (var j = 0; j < listsItems.length; j++) {
+            var isThisWeek = false;
+            for (var day = 0; day < days.length; day++) {
+                var dd = days[day].getDate();
+                var mm = days[day].getMonth()+1; 
+                var yyyy = days[day].getFullYear();
+                if (dd<10) {dd='0'+dd;} 
+                if (mm<10) {mm='0'+mm;} 
+                var todaysDate = yyyy+"-"+mm+"-"+dd;
+                if (listsItems[j].getElementsByTagName("h3")[0].textContent == todaysDate) {
+                    isThisWeek = true;
+                }
+            }
+
+
+
+            if (isThisWeek == true) {
+                var text = listsItems[j].getElementsByTagName("p")[0].textContent;
+                var p = document.createElement("p");
+                p.textContent = text;
+                var div = document.createElement("div");
+                div.className = "listContentsContainer"
+                div.appendChild(p);
+
+                var deleteButton = document.createElement("div");
+                deleteButton.className = "buttonWrapDeleteItem";
+                deleteButton.hidden = true;
+
+                var svg = document.createElement("svg");
+                deleteButton.appendChild(svg);
+                svg.outerHTML = '<svg class="svgSizingChanges2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>';
+
+                var itemIdentifier = document.createElement("h1");
+                itemIdentifier.textContent = listsItems[j].getElementsByTagName("h1")[0].textContent;
+                itemIdentifier.hidden = true;
+
+                var listIdentifier = document.createElement("h6");
+                listIdentifier.textContent = document.getElementById("listHeading").getElementsByTagName("p")[0].innerHTML;
+                listIdentifier.hidden = true;
+
+                var li = document.createElement("li");
+                li.className = "contentsItem";
+                
+                li.appendChild(div);
+                li.appendChild(itemIdentifier);
+                li.appendChild(listIdentifier);
+
+                var x = lists[i].getElementsByClassName("identifier")[0].textContent;
+                
+                
+                li.onclick = todayItemClicked.bind(this, [x, lists]);
+                listContentsDestination.appendChild(li);
+            }
+
+        }
+    }
+
+    //Hide add and remove items buttons
+    document.getElementById("mainButtonPlus").hidden = true;
+    document.getElementById("mainButtonMinus").hidden = true;
+
+}
+
 function deleteNotification(x) {
     x.parentElement.removeChild(x);
 }
@@ -684,6 +828,7 @@ function logout() {
     window.localStorage.removeItem("colours1");
     window.localStorage.removeItem("colours2");
     window.localStorage.removeItem("colours3");
+    window.localStorage.removeItem("language");
 }
 
 //Event Handler
@@ -723,6 +868,11 @@ function EventHandler() {
         //On-click functionality for today list
         document.getElementsByClassName("today")[0].onclick = function() {
             clickedToday();
+        }
+
+        //On-click functionality for thisWeek list
+        document.getElementsByClassName("thisWeek")[0].onclick = function() {
+            clickedThisWeek();
         }
 
         //On-click functionality for button to exit delete-list mode
@@ -1025,5 +1175,5 @@ window.onload = function() {
         //Event handler   
         EventHandler();
     }
-    catch (e){console.log(e)};
+    catch {};
 }

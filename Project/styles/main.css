@@ -1,13 +1,13 @@
   
-#sidenavLeft::-webkit-scrollbar, #sidenavRight::-webkit-scrollbar, #notificationsMenu::-webkit-scrollbar, #settingsMenu::-webkit-scrollbar {
+#sidenavLeft::-webkit-scrollbar, #sidenavRight::-webkit-scrollbar, #notificationsMenu::-webkit-scrollbar, #settingsMenu::-webkit-scrollbar, #main::-webkit-scrollbar {
   width: 5px;
 }
 
-#sidenavLeft::-webkit-scrollbar-track, #sidenavRight::-webkit-scrollbar-track, #notificationsMenu::-webkit-scrollbar-track, #settingsMenu::-webkit-scrollbar-track {
+#sidenavLeft::-webkit-scrollbar-track, #sidenavRight::-webkit-scrollbar-track, #notificationsMenu::-webkit-scrollbar-track, #settingsMenu::-webkit-scrollbar-track, #main::-webkit-scrollbar-track {
   background: lightblue;
 }
 
-#sidenavLeft::-webkit-scrollbar-thumb, #sidenavRight::-webkit-scrollbar-thumb, #notificationsMenu::-webkit-scrollbar-thumb, #settingsMenu::-webkit-scrollbar-thumb {
+#sidenavLeft::-webkit-scrollbar-thumb, #sidenavRight::-webkit-scrollbar-thumb, #notificationsMenu::-webkit-scrollbar-thumb, #settingsMenu::-webkit-scrollbar-thumb, #main::-webkit-scrollbar-thumb {
   background-color: black;
   border-radius: 5px;
   border: 1px solid black;
@@ -38,6 +38,9 @@
   border-left: 3px #1B3280 solid;
   border-top: 3px #1B3280 solid;
   border-right: 3px #1B3280 solid;
+  overflow: auto;
+  scrollbar-color: black lightblue;
+  scrollbar-width: 5px;
 }
 
 #calendarPane {
@@ -112,6 +115,10 @@
   transform: translateX(-50%);
   position: relative;
   display: block;
+}
+
+#itemForm input:hover {
+  cursor: text;
 }
 
 #itemForm .taskDescription {
@@ -258,6 +265,10 @@ ul {
   list-style-type: none;
 }
 
+#mainButtonsContainer {
+  margin: 0 0 5vw 0;
+}
+
 .buttonWrapMain {
   width: 2vw;
   height: 2vw;
@@ -265,7 +276,6 @@ ul {
   border-color: #1B3280;
   border-width: 10%;
   border-style: solid;
-  margin: 0;
   position: absolute;
 }
 
@@ -456,6 +466,31 @@ select {
   transform: translateY(-15%);
 }
 
+.logoContainerSmall {
+  width: 8vw;
+  height: 1.8vw;
+  background-color:	white;
+  border-color: black;
+  border-width: 10%;
+  border-style: solid;
+  margin: 0 0 0 5%;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0;
+}
+
+.logoContainerSmall h3 {
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  font-size: 1vw;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
@@ -502,6 +537,13 @@ select {
   font-family: 'Brush Script MT', cursive;
   font-size: 1.5vw;
   border-color: black;
+}
+
+#LoginForm p {
+  color: red;
+  font-size: 20px;
+  padding: 0;
+  margin: 0 0 3% 0;
 }
 
 #loginForm a, #createAccountForm a, #itemForm a {
